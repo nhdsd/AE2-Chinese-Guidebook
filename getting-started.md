@@ -1,6 +1,6 @@
 ---
 navigation:
-  title: 入门（1.20+）
+  title: 新手上路（1.20+）
   position: 10
 ---
 
@@ -8,7 +8,7 @@ navigation:
   下面的内容仅适用于Minecraft 1.20或更高版本的AE2。
 </div>
 
-# 入门
+# 新手上路
 ## 获取初始材料
 
 <GameScene zoom="4" background="transparent">
@@ -32,8 +32,9 @@ navigation:
 <ImportStructure src="assets/assemblies/budding_certus_1.snbt" />
 </GameScene>
 
-赛特斯石英芽会从[赛特斯石英母岩](items-blocks-machines/budding_certus.md)中长出来，就像紫水晶一样。如果你破坏未完成生长的赛特斯石英芽，它会掉落1个<ItemLink id="certus_quartz_dust" />，不受时运附魔影响。如果你破坏生长完成的赛特斯石英簇，它会掉落4个
-<ItemLink id="certus_quartz_crystal" />，并且时运附魔会提升这一数目。
+赛特斯石英芽会从[赛特斯石英母岩](items-blocks-machines/budding_certus.md)中长出来，就像紫水晶一样。
+如果你破坏未完成生长的赛特斯石英芽，它会掉落1个<ItemLink id="certus_quartz_dust" />，不受时运附魔影响。
+如果你破坏生长完成的赛特斯石英簇，它会掉落4个<ItemLink id="certus_quartz_crystal" />，并且时运附魔会提升这一数目。
 
 赛特斯石英母岩有4种等级：无瑕、有瑕、开裂和损坏。
 
@@ -42,36 +43,40 @@ navigation:
 <IsometricCamera yaw="195" pitch="30" />
 </GameScene>
 
-每当石英芽生长至下一阶段，母岩均有可能降级1级，直至变成普通的赛特斯石英块。 They can be repaired (and new budding blocks created) by throwing the budding block (or a
-certus quartz block) in water with one or more <ItemLink id="charged_certus_quartz_crystal" />.
+每当石英芽生长至下一阶段，母岩均有可能降级1级，直至变成普通的赛特斯石英块。可将母岩（或石英块）和至少一个<ItemLink id="charged_certus_quartz_crystal" />
+一同丢入水中以修复它们（或产生新的母岩）。
 
 <RecipeFor id="damaged_budding_quartz" />
 
-无暇的赛特斯石英母岩 will not degrade and will generate certus infinitely. However they cannot be crafted or moved
-with a pickaxe, even with silk touch. (they *can* be moved with [](ae2-mechanics/spatial-io.md) though)
+*Throw in: 扔入*
 
-By themselves, certus quartz buds grow very slowly. Luckily the <ItemLink id="growth_accelerator" /> massively
-accelerates this process when placed adjacent to the budding block. You should build a few of these as your first priority.
+无瑕的赛特斯石英母岩不会降级，能够无限产生赛特斯石英。但是它们无法被合成，也无法被稿子挖掘后移动（会降级），哪怕稿子附魔有精准采集。
+（然而，它们*可以*用[空间IO](ae2-mechanics/spatial-io.md)移动）
+
+>译者注：IO = **I**nput & **O**utput, 输入输出。
+
+赛特斯石英芽的自行生长很慢。幸运的是，<ItemLink id="growth_accelerator" />可以大幅加快其相邻母岩上的水晶芽的生长速度。你应当把建造该装置作为你的首要任务。
 
 <GameScene zoom="4" background="transparent">
 <ImportStructure src="assets/assemblies/budding_certus_2.snbt" />
 <IsometricCamera yaw="195" pitch="30" />
 </GameScene>
 
-If you don't have enough quartz to also make an <ItemLink id="energy_acceptor" /> or <ItemLink id="vibration_chamber" />,
-you can make a <ItemLink id="crank" /> and stick it on the end of your accelerator.
+如果你没有足够的水晶来制作<ItemLink id="energy_acceptor" />或<ItemLink id="vibration_chamber" />，
+你可以制作一个<ItemLink id="crank" />并把它放置在你的催生器的一侧。
 
-Harvesting the certus automatically is [described here](example-setups/simple-certus-farm.md).
+自动化收获赛特斯石英的方法[参见此处](example-setups/simple-certus-farm.md)。
 
-## A Quick Aside on Fluix
+## 对福鲁伊克斯水晶的简单介绍
 
-Another material you will need is Fluix, which you have already encountered in making growth accelerators. It is made by throwing charged certus, redstone, and nether quartz in water. Doing this automatically is "left as an exercise for the reader."
+福鲁伊克斯水晶是你所需要的另一种材料，你应该已经在制作晶体催生器时使用过它。它可通过将充能赛特斯石英、红石和下界石英一同扔入水中来合成。
+对此的自动化**留给读者作为练习。**
 
-The <ItemLink id="charger" /> is required to produce <ItemLink id="charged_certus_quartz_crystal" />., if you haven't made one already.
+如果你还不知道的话，顺带一提，<ItemLink id="charger" />是制作<ItemLink id="charged_certus_quartz_crystal" />所必须的。
 
-## Inscribing Some Processors
+## 压印处理器
 
-In your looting of a 陨石, you will have found four "presses" from breaking the Mysterious Cube. These are used in the <ItemLink id="inscriber" /> to make the three types of processor.
+在你搜刮陨石的资源时，你会在破坏神秘方块时得到4块**压印板**。它们被用于<ItemLink id="inscriber" />以制作三种处理器。
 
 <ItemGrid>
   <ItemIcon id="silicon_press" />
@@ -83,82 +88,76 @@ In your looting of a 陨石, you will have found four "presses" from breaking th
   <ItemIcon id="engineering_processor_press" />
 </ItemGrid>
 
-The inscriber is a sided machine, much like the vanilla furnace. Inserting from the top or bottom places items in the top or bottom slots, and inserting from the side or back inserts into the center slot. Results can be pulled from the side or back.
+压印器如同原版的熔炉一样，是有方向性的。从上/下方的物品输入会把物品放入上/下方的物品槽，而从侧面和后方的输入会将物品放入中间的物品槽。 
+产物可从侧面或后方输出。
 
-To facilitate automation with hoppers (and possibly reduce pipe spaghetti), inscribers can be rotated with a <ItemLink id="certus_quartz_wrench" />.
+为利用漏斗实现自动化（并减少管道的使用），压印器可以用<ItemLink id="certus_quartz_wrench" />旋转。
 
-Produce a few of each type of processor in preparation for the next step, making a very basic ME system. Automating processor production is "left as an exercise for the reader".
+每种处理器都制作一些，为下一步制作基础ME系统做准备。处理器生产自动化**留给读者作为练习。**
 
-## Matter Energy Tech: ME Networks and Storage
+## 物质能量技术：ME网络与储存
 
-### What is ME Storage?
+### ME储存是什么？
 
-Its pronounced Emm-Eee, and stands for Matter Energy.
+它读作Emm-Eee(\[emi:\])，意为物质能量(Matter Energy)。
 
-Matter Energy is the main component of Applied Energistics 2, it's like a mad scientist version of a Multi-Block chest,
-and it can revolutionize your storage situation. ME is extremely different than other storage systems in Minecraft, and
-it might take a little out of the box thinking to get used to; but once you get started vast amounts of storage in tiny
-space, and multiple access terminals are just the tip of the iceberg of what becomes possible.
+ME是AE2的主要组成部分，它可以说是多方块箱子的一种疯狂科学版，可以为你的储存带来革命性的变化。
+ME与Minecraft中的其他储存系统有极大的不同，并且你可能需要另辟蹊径地思考来习惯它；
+但是一旦你着手于此，小空间大储存以及多个访问终端仅仅是它能做到的事的冰山一角。
 
-### What do I need to know to get started?
+### 开始前要了解的
 
-First, ME Stores items inside of other items, called [Storage cells](items-blocks-machines/storage_cells.md); there are 5 tiers with ever increasing amounts of
-storage. In order to use a Storage Cell it must be placed inside either an <ItemLink id="chest" />,
-or an <ItemLink id="drive" />.
+首先，ME把物品存储在另一种物品中，这些物品叫做[存储元件](items-blocks-machines/storage_cells.md)；它们有5个等级，容量逐级递增。
+要使用存储单元，它们必须被放进<ItemLink id="chest" />或<ItemLink id="drive" />中。
 
-The <ItemLink id="chest" /> shows you the contents of the Cell as soon as its placed inside, and you
-can add and remove items from it as if it were a <ItemLink id="minecraft:chest" />, with the exception that the items are
-actually stored in the Storage cells, and not the <ItemLink id="chest" /> itself.
+<ItemLink id="chest" />能在存储元件被放入后立即显示其内容物，并且你能够像使用<ItemLink id="minecraft:chest" />一样放入或拿出物品，
+尽管物品实际被存储在元件而非<ItemLink id="chest" />本身当中。
 
-While the <ItemLink id="chest" /> is a great way to get introduced to the concept of ME, to really
-take advantage you need to set up an [ME Network](ae2-mechanics/me-network-connections.md).
+尽管<ItemLink id="chest" />是理解ME概念的绝佳手段，要真正利用ME的优势，你需要搭建一个[ME网络](ae2-mechanics/me-network-connections.md).
 
-## Your Very First ME System
+## 第一个ME系统
 
-Now that you have all of the basic materials and machines for Applied Energistics 2, you can make your first ME (Matter Energy) system. This will be a very basic one, no autocrafting, no logistics, just nice, simple, searchable storage.
+既然你已经有了AE2里所有的基本材料与机器，你就可以建立起你的第一个ME系统了。它很基本，没有自动合成，没有物流，只有简单、整洁、可搜索的存储。
 
 <GameScene zoom="6" interactive={true}>
 <ImportStructure src="assets/assemblies/tiny_me_system.snbt" />
 
 </GameScene>
 
-*   Your ingredients list:
+*   所需材料列表：
     * 1x <ItemLink id="drive" />
-    * 1x <ItemLink id="terminal" /> or <ItemLink id="crafting_terminal" />
+    * 1x <ItemLink id="terminal" />或<ItemLink id="crafting_terminal" />
     * 1x <ItemLink id="energy_acceptor" />
-    * A few [cables](items-blocks-machines/cables.md), either glass, covered, or smart, but not dense
-    * A few [storage cells](items-blocks-machines/storage_cells.md), recommended of the 4k variety for a good mix of
-    capacity and types (it would be more efficient to [partition](items-blocks-machines/cell_workbench.md) a mix of 4k and 1k but that's a complexity we won't go into now)
+    * 一些[线缆](items-blocks-machines/cables.md)，玻璃的、包层的和智能的都行，但是不能用致密的
+    * 一些[存储元件](items-blocks-machines/storage_cells.md)，推荐4k版以取得容量与种类的平衡（用4k和1k的组合进行[分区](items-blocks-machines/cell_workbench.md)效率更高，但是太复杂，在此不深入讨论）
+
 ---
-1.  Place the drive down.
-2.  The energy acceptor (and several other AE2 [devices](ae2-mechanics/devices.md)) comes in 2 modes, cube and flat. They can be switched between in a crafting grid. If your energy acceptor is a cube, place it down next to the drive. If it's a flat square, place a cable on the drive and place the acceptor on that.
-3.  Run energy into the energy acceptor with a cable/pipe/conduit from your favorite energy-generation mod.
-4.  Place a cable on top of the drive (or otherwise at eye level) and place your terminal or crafting terminal on it.
-5.  Put your storage cells into the drive
-6.  Profit
-7.  Fiddle with the terminal's settings
-8.  Bask in your ultimate power and ability
-9.  Realize that this network is, in the grand scheme, rather small
 
-### Expanding your Network
+1.  放置驱动器。
+2.  能源接收器（以及一部分其他的AE2[设备](ae2-mechanics/devices.md)）有2种模式——方块式与薄板式，它们可通过工作台相互转化。如果你的能源接收器是方块式的，把它放在驱动器旁；如果它是薄板式的，在驱动器上放置一根线缆并把它放上去。
+3.  用你最爱的能源模组产生能源，并用线缆/管道/导管将其导入能源接收器。
+4.  在驱动器顶端（或者，与视线平齐处）放置一根线缆然后把你的（合成）终端放上去。
+5.  把存储元件放入驱动器中。
+6.  享受它带来的便利！
+7.  调整一下终端设置。
+8.  尽情享受你*无尽*的力量与能力。
+9.  最终意识到：宏观上来讲，这网络其实很小。
 
-So you have some basic storage, and access to that storage, it's a good start, but you'll likely be looking to maybe
-automate some processing.
+### 扩展你的网络
 
-A great example of this is to place a <ItemLink id="export_bus" /> on the top of a furnace to
-dump in ores, and a <ItemLink id="import_bus" />
-on the bottom of the furance to extract furnaced ores.
+现在你有了基础的存储以及对它的访问方法，这是个不错的开端，但你很可能已经在盘算着些什么，也许是自动化？
 
-The <ItemLink id="export_bus" /> lets you export items from the network, into the attached
-inventory, while the <ItemLink id="import_bus" /> imports items from the attached inventory into
-the network.
+这方面的一个绝佳实例是在熔炉顶端放一个<ItemLink id="export_bus" />来输入矿石，
+并在底端放一个<ItemLink id="import_bus" />来提取烧炼产物。
 
-### Overcoming Limits
+<ItemLink id="export_bus" />让你能够从网络中把物品提取出来并放进它所依附的容器内，
+<ItemLink id="import_bus" />则反过来把物品从它所依附的容器中提取出来输入网络当中。
 
-At this point you probably getting close to 8 or so [devices](ae2-mechanics/devices.md), once you hit 9 devices you'll have to start
-managing [channels](ae2-mechanics/channels.md). Many devices but not all, require a channel to
-function.
+### 克服限制
 
-By default a network can support 8 channels, once you break this limit, you'll have to add
-an <ItemLink id="controller" /> to your network. this allows you to expand your network greatly.
-[Smart cables](items-blocks-machines/cables.md) will allow you to see how channels are routed through your network. Use them extensively when starting out to learn how channels act, or if you have a lot of redstone and glowstone.
+现在你大概已经有了将近8台[设备](ae2-mechanics/devices.md)，当这个数字达到9，你就需要管理[频道](ae2-mechanics/channels.md)了，
+许多设备（但不是全部）需要占用频道以工作。
+
+一个网络默认支持8个频道，一旦你超过该值，你就需要往网络中添加<ItemLink id="controller" />，它能够极大地扩展你的网络。
+[智能线缆](items-blocks-machines/cables.md)能让你看到频道在网络中的路由情况。如果你希望学习频道在网络中的路由机制，你应当大量使用它们。
+当然如果你有很多红石和荧石，这样干也不是不行。

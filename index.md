@@ -3,6 +3,7 @@ navigation:
   title: 索引/目录
   position: 0
 ---
+# 应用能源2是什么？
 
 # 如何阅读该教程？
 
@@ -15,7 +16,7 @@ navigation:
 应用能源2添加了一些组件与机制来为物流与存储问题提供解决方案。你可以把那充满箱子的大房间替换成紧凑的ME网络，不过这仅仅是开始。
 AE被设计成与整合包中的其他模组联动以实现自动化。只需轻轻一点，你就可以合成复杂的合成链条中各种必要的前体（以及终产物），或是储存大量的物品并在需要时合成更多，抑或是仅仅在你的基地里传输物品。
 
-* [入门](getting-started.md)
+* [新手上路](getting-started.md)
 * [提示与技巧](tips-and-tricks.md)
 * [AE2机制](ae2-mechanics/ae2-mechanics-index.md)
 * [范例](example-setups/example-setups-index.md)
@@ -25,3 +26,7 @@ AE被设计成与整合包中的其他模组联动以实现自动化。只需轻
   <ImportStructure src="assets/assemblies/autocraft_setup_greebles.snbt" />
   <IsometricCamera yaw="195" pitch="30" />
 </GameScene>
+
+---
+
+本中文指南由 GitHub [@nhdsd](https://github.com/nhdsd) 翻译，翻译内容以知识共享-署名 4.0(CC-BY 4.0)授权，详见此 [GitHub 仓库](https://github.com/nhdsd/AE2-Chinese-Guidebook)。
