@@ -1,25 +1,24 @@
 ---
 navigation:
   parent: ae2-mechanics/ae2-mechanics-index.md
-  title: Autocrafting
+  title: 自动合成
   icon: pattern_provider
 ---
 
-# Autocrafting
+# 自动合成
 
-### The Big One
+### 大家伙
 
 <GameScene zoom="4" interactive={true}>
   <ImportStructure src="../assets/assemblies/autocraft_setup_greebles.snbt" />
   <IsometricCamera yaw="195" pitch="30" />
 </GameScene>
 
-Autocrafting is one of the primary functions of AE2. Instead of manually having to craft the correct number of each sub-ingredient
-and labor away like some sort of *plebian*, you can ask your ME system to do it for you. Or automatically craft items and export them somewhere.
-Or automatically keep certain amounts of items in stock through clever emergent behavior. It also works with fluids, and, if you have
-certain addons for extra mod material types, like Mekanism gasses, those materials too. It's pretty great.
+自动合成是AE2的基础功能之一。你可以利用你的ME系统完成合成，或是自动合成并运输到某处，
+抑或是通过<u>智能涌现</u><sup>\[注\]</sup>存储一定数量的物品，而不是自己先合成正确数量的各种原料，像个*底层劳动人民*一样辛勤劳作。
+该系统也可处理流体及来自增加了新的材料类型的模组的附加项（如通用机械的气体）。这可谓是很棒了。
 
-It is quite a complex topic, so strap in and let's go.
+这是个复杂的话题。所以，系好安全带，我们要出发了！
 
 An autocrafting setup consists of 3 things:
 - The thing sending the crafting request
@@ -43,6 +42,8 @@ Here is what happens:
     **Note that an "item entering system" event must occur, you can't just pipe the result into a chest with a <ItemLink id="storage_bus" /> on it.**
 
 5.  If that craft is a prerequisite for another craft in the request, the items are stored in that crafting CPU and then used in that craft.
+
+**\[注\]** 原文是"clever emergent behavior"。译者无法确认此处该词语的实际意义，采取了直译。
 
 # Patterns
 

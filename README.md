@@ -38,9 +38,11 @@ A2 当然！只要你遵循本项目的开源许可证。但是，你可能同�
 * `tips-and-tricks.md`
 * `index.md`
 * `getting-started.md`
+* `ae2-mechanics\ae2-mechanics-index.md`
 
 ### 部分完成
+* `ae2-mechanics\autocrafting.md`
 
 ### 计划中
 **部分完成**部分的内容默认计入**计划中**部分。
-* `ae2-mechanics\ae2-mechanics-index.md`
+* `ae2-mechanics\bytes-and-types.md`

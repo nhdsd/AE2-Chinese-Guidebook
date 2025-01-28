@@ -1,9 +1,9 @@
 ---
 navigation:
-  title: AE2 Mechanics
+  title: AE2 机制
   position: 30
 ---
 
-# AE2 Mechanics
+# AE2 机制
 
 <SubPages />
