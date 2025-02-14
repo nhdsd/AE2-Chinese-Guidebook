@@ -20,104 +20,89 @@ navigation:
 
 这是个复杂的话题。所以，系好安全带，我们要出发了！
 
-An autocrafting setup consists of 3 things:
-- The thing sending the crafting request
-- The crafting CPU
-- The <ItemLink id="pattern_provider" />.
+自动合成系统由以下三部分组成：
+- 合成请求来源；
+- 合成CPU；
+- <ItemLink id="pattern_provider" />。
 
-Here is what happens:
+合成过程如下：
 
-1.  Something creates a crafting request. This can be you in the terminal clicking on something autocraftable,
-    or an export bus or interface with a crafting card requesting one of the item they're set to export/stock.
+1.  某个来源发送了合成请求。这种请求的来源包括你在终端中点击可自动合成的物品以及带有合成卡的输出总线或接口请求它们需要输出/存储的物品之一。
 
-*   (**IMPORTANT:** use whatever you have bound to "pick block" (usually middle-mouse) to request crafts of something you already have in stock, this can conflict with inventory sorting mods),
+*   (**重要事项：** 使用“选取方块”键(默认为鼠标中键)来发起对网络中已存储的物品的请求。这可能与物品栏整理模组有键位冲突。)
 
-2.  The ME system calculates the required ingredients and prerequisite crafting steps to fulfill the request, and stores them in the selected crafting CPU
+2.  ME系统计算完成合成所需的原料以及预处理步骤，并把物品储存在所选CPU中。
 
-3.  The <ItemLink id="pattern_provider" /> with the relevant [pattern](../items-blocks-machines/patterns.md) pushes the ingredients specified in the pattern to any adjacent inventory.
-    In the case of a crafting table recipe (a "crafting pattern") this will be a <ItemLink id="molecular_assembler" />.
-    In the case of a non-crafting recipe (a "processing pattern") this will be some other block or machine or elaborate redstone-controlled setup.
+3.  带有有关[样板](../items-blocks-machines/patterns.md)的<ItemLink id="pattern_provider" />将物品送入相邻的容器。
+    如果是合成类配方(合成样板)，该容器将会是<ItemLink id="molecular_assembler" />；
+    如果是非合成类配方(处理样板)，该容器可能是一些其他的方块或者机器，抑或是精心设计的红石控制的处理装置。
 
-4.  The result of the craft is returned to the system somehow, be it by import bus, interface, or pushing the result back into a pattern provider.
-    **Note that an "item entering system" event must occur, you can't just pipe the result into a chest with a <ItemLink id="storage_bus" /> on it.**
+4.  合成产物通过某种方式返回系统，这可以是通过输入总线或接口，也可以是把产物送入样板供应器。
+    **产物必须要进入系统内，例如通过<ItemLink id="import_bus" />、<ItemLink id="interface" />或者<ItemLink id="pattern_provider" />的产物返回栏。你无法直接把产物导入接有<ItemLink id="storage_bus" />的箱子。**
 
-5.  If that craft is a prerequisite for another craft in the request, the items are stored in that crafting CPU and then used in that craft.
+5.  若此次合成是某次合成的预处理，则产物会被缓存在CPU内用于下次合成。
 
 **\[注\]** 原文是"clever emergent behavior"。译者无法确认此处该词语的实际意义，采取了直译。
 
-# Patterns
+# 样板
 
 <ItemImage id="crafting_pattern" scale="4" />
 
-Patterns are made in a <ItemLink id="pattern_encoding_terminal" /> out of blank patterns.
+空白样板在<ItemLink id="pattern_encoding_terminal" />内被制作成样板。
 
-There are several different types of pattern for different things:
+为应对不同需求，样板有以下不同类型：
 
-*   <ItemLink id="crafting_pattern" />s encode recipes made by a crafting table. They can be put directly in a <ItemLink id="molecular_assembler" /> to make it
-    craft the result whenever given the ingredients, but their main use is in a <ItemLink id="pattern_provider" /> next to a molecular assembler.
-    Pattern providers have special behavior in this case, and will send the relevant pattern along with the ingredients to adjacent assemblers.
-    Since assemblers auto-eject the results of crafts to adjacent inventories, an assembler on a pattern provider is all that is needed to automate crafting patterns.
-
-***
-
-*   <ItemLink id="smithing_table_pattern" />s are very similar to crafting patterns, but they encode smithing table recipes. They are also automated by a pattern
-    provider and molecular assembler, and function in the exact same way. In fact, crafting, smithing, and stonecutting patterns can be
-    used in the same setup.
+*   <ItemLink id="crafting_pattern" />编码合成台配方。它们可以被放在<ItemLink id="molecular_assembler" />里，让它只要有原料就合成相应产物，
+但是它们主要用于与分子装配室相邻的<ItemLink id="pattern_provider" />里。此时样板供应器会有特殊的行为，会把样板和原料一同送进相邻的分子装配室。
+鉴于分子装配室会把产物自动弹出至相邻容器这种，装配室与样板供应器的组合足以自动化工作台合成。
 
 ***
 
-*   <ItemLink id="stonecutting_pattern" />s are very similar to crafting patterns, but they encode stonecutter recipes. They are also automated by a pattern
-    provider and molecular assembler, and function in the exact same way. In fact, crafting, smithing, and stonecutting patterns can be
-    used in the same setup.
+*   <ItemLink id="smithing_table_pattern" />和合成样板很相似，但是它们编码锻造台配方。它们也可以用装配室和样板提供器自动化，且工作方式完全相同。
+实际上合成、锻造和切石配方可以用同样的机器处理。
 
 ***
 
-*   <ItemLink id="processing_pattern" />s are where a lot of flexibility in autocrafting comes from. They are the most generalized type, simply
-    saying "if a pattern provider pushes these ingredients to adjacent inventories, the ME system will recieve these items at some point in the
-    near or distant future". They are how you will autocraft with almost any modded machine, or furnaces and the like. Because they are so
-    general in use and do not care what happens between pushing ingredients and receiving the result, you can do some really funky stuff, like inputting
-    the ingredients into an entire complex factory production chain which will sort out stuff, take in other ingredients from infinitely-producing
-    farms, print the entirety of the Bee Movie script, the ME system does not care as long as it gets the result the pattern specifies. In fact,
-    it doesn't even care if the ingredients are in any way related to the result. You could tell it "1 cherry wood planks = 1 nether star" and have
-    your wither farm kill a wither upon receiving a cherry wood planks and it would work.
+*   <ItemLink id="stonecutting_pattern" />和合成样板很相似，但是它们编码切石配方。它们也可以用装配室和样板提供器自动化，且工作方式完全相同。
+实际上合成、锻造和切石配方可以用同样的机器处理。
 
-Multiple <ItemLink id="pattern_provider" />s with identical patterns are supported and work in parallel. Additionally, you can have a pattern say,
-for example, 8 cobblestone = 8 stone instead of 1 cobblestone = 1 stone, and the pattern provider will insert 8 cobblestone into
-your smelting setup every operation instead of one at a time.
+***
 
-## The Most General Form of "Pattern"
+*   <ItemLink id="processing_pattern" />为自动合成带来了极大的灵活性。它们是最具有普适性的一种，
+只表明“如果样板供应器将原料送进相邻容器，那么ME系统就会在将来某时刻收到产物”。
+这是你使用模组机器、熔炉以及类似物来合成时使用的样板。鉴于它们使用得很频繁并且不关注合成过程，你可以用它们做一些真正不同寻常的事，
+例如，把原料放进复杂的物品整理产线，或是从不断产出的可再生农场中取出其他原料，抑或是把整个《蜜蜂总动员》的剧本打印出来。
+ME系统不关心这些，它只关心它收没收到样板所指明的产物。实际上，它甚至不关心原料和产物是否有任何关系。
+你可以给它一个“1樱花木板 = 1下界之星”的样板，并让你的凋灵农场在接收到1个樱花木板时杀死1只凋灵，这样也能正常工作。
 
-There is actually an even more "general" form of "pattern" than a processing pattern. A <ItemLink id="level_emitter" /> with a crafting card can be set
-to emit a redstone signal in order to craft something. This "pattern" does not define, or even care about ingredients.
-All it says is "If you emit redstone from this level emitter, the ME system will recieve this item at some point in the
-near or distant future". This is usually used to activate and deactivate infinite farms which require no input ingredients,
-or to activate a system that handles recursive recipes (which standard autocafting cannot understand) like, for example, "1 cobblestone = 2 cobblestone"
-if you have a machine that duplicates cobblestone.
+多个具有完全相同的样板的<ItemLink id="pattern_provider" />是受支持的并且可以并行处理。此外，你可以编码一个8圆石 = 8石头的样板而不是1圆石 = 1石头的。
+这时，样板供应器会每次把8个圆石放入你的烧炼机器，而非1个。
 
-# The Crafting CPU
+## "样板"的最一般形式
+
+实际上有比处理样板更“一般”的“样板”形式。带有合成卡的<ItemLink id="level_emitter" />可被设置为为了合成某物而发出红石信号。该“样板”不指明，也不关心原料。
+它只表明“如果该标准发信器发出红石信号，那么ME系统就会在将来某时刻收到产物”。这一般用于激活或停止无需输入的可再生农场，
+或是激活递归合成系统（标准的自动合成无法解析），一个例子是“1圆石=2圆石”，如果你有一台圆石复制机。
+
+# 合成CPU
 
 <GameScene zoom="4" background="transparent">
   <ImportStructure src="../assets/assemblies/crafting_cpus.snbt" />
   <IsometricCamera yaw="195" pitch="30" />
 </GameScene>
+合成CPU处理合成请求。它们在执行多步合成时储存中间产物，还会影响请求的最大大小并在一定程度上影响执行速度。它必须是有至少1个合成储存器的实心长方体多方块结构。 
 
-Crafting CPUs manage crafting requests/jobs. They store the intermediate ingredients while crafting jobs with multiple steps are
-being carried out, and affect how big jobs can be, and to some degree how fast they are completed. They are multiblocks, and
-must be rectangular prisms with at least 1 crafting storage.
+合成CPU由如下部分组成：
 
-Crafting CPUs are made out of:
+*   (必选)[合成存储器](../items-blocks-machines/crafting_cpu_multiblock.md)，各种标准元件大小均有(1k、4k、16k、64k、256k)。它们存储合成过程中的中间产物
+因此，为使CPU可以处理有更多的原料的合成请求，必须要有更大的存储空间。
+*   (可选)<ItemLink id="crafting_accelerator" />，它们让系统能够一次性通过样板提供器送出更多批原料。这使得六面均被分子装配室包围的样板提供器可一次性把原料送进（进而能够使用）全部六个装配室，而不是一个。
+*   (可选)<ItemLink id="crafting_monitor" />，它们显示CPU当前正在处理的请求。可用<ItemLink id="color_applicator" />上色。
+*   (可选)<ItemLink id="crafting_unit" />，它们仅仅用于占位，以使得CPU呈长方体。
 
-*   (Required) [Crafting storages](../items-blocks-machines/crafting_cpu_multiblock.md), available in all the standard cell sizes (1k, 4k, 16k, 64k, 256k). They store the ingredients and
-    intermediate ingredients involved in a craft, so larger or more storages are required for the CPU to handle crafting jobs
-    with more ingredients.
-*   (Optional) <ItemLink id="crafting_accelerator" />s, they make the system send out more ingredient batches from pattern providers.
-    This allows, say, a pattern provider surrounded by 6 molecular assemblers to send ingredients to (and thus use) all 6 at once instead of just one.
-*   (Optional) <ItemLink id="crafting_monitor" />s, they display the job the CPU is handling at the moment. They can be colored via a <ItemLink id="color_applicator" />
-*   (Optional) <ItemLink id="crafting_unit" />s, they simply fill space in order to make the CPU a rectangular prism.
+每个合成CPU只能同时处理1个请求。因此如果你想请求同时合成运算处理器以及256个平滑石头，你需要建造2个CPU多方块结构。
 
-Each crafting CPU handles 1 request or job, so if you want to request both a calculation processor and 256 smooth stone at once, you need 2 CPU multiblocks.
-
-They can be set to handle requests from players, automation (export busses and interfaces), or both.
+它们可以被设置为只接受玩家请求、只接受自动化系统（输出总线或者接口）请求或是均接受。
 
 # Pattern Providers
 
