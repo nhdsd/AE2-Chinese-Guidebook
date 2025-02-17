@@ -19,5 +19,5 @@ navigation:
 * 保持你的网络有条理的最好方式就是不要把那些杂七杂八的怪物掉落物（剑和装备等）放进网络。只要附魔或者耐久不同，那它们就是不同的[种类](ae2-mechanics/bytes-and-types.md)。
 * [处理中的样板](items-blocks-machines/patterns.md)的终产物必须要进入系统内，例如通过<ItemLink id="import_bus" />、<ItemLink id="interface" />或者<ItemLink id="pattern_provider" />的产物返回栏。你无法直接把产物导入接有<ItemLink id="storage_bus" />的箱子。
 * 别忘了，如果指南中带有放缩和显示/隐藏按钮，你可以旋转或者放缩这些指南。
-* <ItemLink id="pattern_provider" />只会从一侧推送完整的配方批次。这有助于保证机器不会收到不完整的配方批次，但有时你可能需要让原料去往不同的地方。为实现这一点，你可以使用<ItemLink id="interface" />，不管是用作[“管道”子网](example-setups/pipe-subnet.md)还是利用它能够同时处理多种不同的物品、流体和化学品等的能力把它用作中转的箱子/水槽。
+* <ItemLink id="pattern_provider" />单次只会向一面送出一整批完整的原料。这有助于保证机器不会收到不完整的原料，但有时你可能需要让原料去往不同的地方。为实现这一点，你可以使用<ItemLink id="interface" />，不管是用作[“管道”子网](example-setups/pipe-subnet.md)还是利用它能够同时处理多种不同的物品、流体和化学品等的能力把它用作中转的箱子/水槽。
 * 如果指南中带有放缩和显示/隐藏按钮，你可以旋转或者放缩这些指南。
