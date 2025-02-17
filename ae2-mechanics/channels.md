@@ -1,20 +1,18 @@
 ---
 navigation:
   parent: ae2-mechanics/ae2-mechanics-index.md
-  title: Channels
+  title: 频道
   icon: controller
 ---
 
-# Channels
+# 频道
 
-Applied Energistics 2's [ME Networks](me-network-connections.md) require
-Channels to support [devices](../ae2-mechanics/devices.md) which use networked storage, or other network
-services. Think of channels like USB cables to all your devices. A computer only has so many USB ports and can only support
-so many devices connected to it. Most machines, full-block devices, and standard cables can only pass through
-up to 8 channels. You can think of full-block devices and standard cables as a bundle of 8 "channel wires". However, [dense cables](../items-blocks-machines/cables.md#dense-cable) can support up
-to 32 channels. The only other devices capable of transmitting 32 are <ItemLink id="me_p2p_tunnel" />
-and the [Quantum Network Bridge](../items-blocks-machines/quantum_bridge.md). Each time a device uses up a channel, imagine pulling off a usb "wire" from
-the bundle, which obviously means that "wire" isn't available further down the line.
+应用能源2的[ME网络](me-network-connections.md)需要频道来保证需要使用网络存储或其他网络服务的[设备](../ae2-mechanics/devices.md)。
+把频道想象成连接到你所有设备的USB线。一台电脑只有那么多USB口，也就只能容纳那么多连接到它的设备。
+大部分机器、占完整方块的设备以及普通线缆只能传递至多8个频道。可以把占完整方块的设备和标准线缆想象成一束线，含8条“频道线缆”。
+不过，[致密线缆](../items-blocks-machines/cables.md#dense-cable) 可传递至多32个频道。
+另一种，也是除此之外的唯二的可以传递32个频道的设备是<ItemLink id="me_p2p_tunnel" />和[量子桥](../items-blocks-machines/quantum_bridge.md)。
+每当有设备用掉1个频道，把它想象成一束线中抽出一根USB“线缆”，显然地，这意味着该“线缆”在这根线的后续部分中不再可用。
 
 <GameScene zoom="7" interactive={true}>
   <ImportStructure src="../assets/assemblies/channel_demonstration_1.snbt" />
@@ -49,7 +47,7 @@ the bundle, which obviously means that "wire" isn't available further down the l
   <LineAnnotation color="#33ff33" from="1.5 .1 .3" to="1.5 .4 .3" alwaysOnTop={true}/>
 
   <LineAnnotation color="#ff3333" from="3.5 .5 .5" to="5.5 .5 .5" alwaysOnTop={true}>
-  All 8 channels in the cable have been used, so the Drive does not get one.  
+  线缆中全部8个频道都被用完了，因此驱动器没有分得频道。 
   </LineAnnotation>
 
   <LineAnnotation color="#993333" from="1 .5 .5" to="1.25 .5 .5" alwaysOnTop={true}/>
@@ -59,32 +57,28 @@ the bundle, which obviously means that "wire" isn't available further down the l
   <LineAnnotation color="#993333" from="3 .5 .5" to="3.25 .5 .5" alwaysOnTop={true}/>
 
   <DiamondAnnotation pos="3.6 0.5 0.5" color="#ff0000">
-        All 8 channels in the cable have been used, so the Drive does not get one.
+        线缆中全部8个频道都被用完了，因此驱动器没有分得频道。
     </DiamondAnnotation>
 
   <IsometricCamera yaw="15" pitch="30" />
 </GameScene>
 
-An easy way to see how channels are being used and routed through your network is to use [smart cables](../items-blocks-machines/cables.md), which will display on them the paths and usage of channels.
+[智能线缆](items-blocks-machines/cables.md)是你看到频道在网络中的路由情况的简易方式，它将显示频道的传递路径以及使用量。
 
-Channels will consume 1⁄128 ae/t per node they transverse, this means that by
-adding a <ItemLink id="controller" /> for a
-network with 8 devices and over 96 nodes your power usage might actually
-decrease power consumption because it changes how channels are allocated.
+频道每经过一个节点将耗能1/128 AE/t。这意味着向一个有着8设备以及超过96节点的网络中添加一个<ItemLink id="controller" />可能会降低网络的能耗，因为它改变了频道的分配方式
 
-Of note, **CHANNELS HAVE NOTHING TO DO WITH CABLE COLOR**, all cable color does is make cables not connect.
+值得注意的是**频道和线缆颜色无关**。颜色仅仅是为了防止线缆相连的。
 
-## Channel Routing
+## 频道路由
 
-When using a <ItemLink id="controller" />,
-channels route via 3 steps. They first take the shortest path through adjacent machines to the nearest [normal cable](../items-blocks-machines/cables.md)
-(glass, covered, or smart). They then take the shortest path through that normal cable to the nearest [dense cable](../items-blocks-machines/cables.md)
-(dense or dense smart). They then take the shortest path through that dense cable to the <ItemLink id="controller" />.
-If the shortest path is already maxed out, some [devices](devices.md) may not get their required channels, use
-colored cables, cable anchors and tunnels to your advantage to make sure your channels go in the path you desire.
+使用<ItemLink id="controller" />时，频道分三步路由。
+它们先通过相邻机器经最短路径前往[普通线缆](../items-blocks-machines/cables.md)(玻璃的、覆层的或智能的)；
+然后它们经该普通线缆经最短路径前往[致密线缆](../items-blocks-machines/cables.md)(致密的或智能致密的)；
+最后它们经该致密线缆经最短路径前往<ItemLink id="controller" />。
+若最短路径以及被占满，部分[设备](devices.md)可能无法获得所需频道，使用染色线缆、线缆锚以及通道来确保
+频道按照你希望的路径来路由。
 
-For example, in this case some drives don't get channels because although there is enough capacity in the cables, the
-channels try to take the shortest path, overloading some cables while leaving others empty.
+例如，此例中部分驱动器无法分得频道，因为尽管线缆中频道承载量充足，但是频道试图按照最短路径路由，会使得部分线缆超载而部分线缆无频道经过。
 
 <GameScene zoom="4" interactive={true}>
   <ImportStructure src="../assets/assemblies/channel_path_length_issue.snbt" />
@@ -104,15 +98,14 @@ channels try to take the shortest path, overloading some cables while leaving ot
   <LineAnnotation color="#ff3333" from="3 .5 3.4" to="1.6 .5 3.4" alwaysOnTop={true} thickness="0.05"/>
 
   <BoxAnnotation color="#dddddd" min="1.2 0.2 3.2" max="1.8 0.8 3.8" alwaysOnTop={true} thickness="0.05">
-        More than 8 channels attempt to route through here so some are cut off.
+        超过8个频道在路由时试图经过此处导致部分频道被截断。
   </BoxAnnotation>
 
   <IsometricCamera yaw="90" pitch="90" />
 
 </GameScene>
 
-This can be fixed by more carefully constraining the paths channels can take. Networks should be treelike (or bushlike).
-Loops and ambiguous channel paths should be minimized.
+更仔细地制约频道的路径可以解决此问题。频道应当呈树状（或者叫刷子状），环和模糊不清的频道路径应极力避免。
 
 <GameScene zoom="4" interactive={true}>
   <ImportStructure src="../assets/assemblies/channel_path_length_issue_fix.snbt" />
@@ -128,118 +121,113 @@ Loops and ambiguous channel paths should be minimized.
 
 </GameScene>
 
-## Ad-Hoc Networks
+## 自组织网络
 
-A Network without a <ItemLink id="controller" />
-is considered to be Ad-Hoc, and can support up to 8 channel using devices.
-Once you exceed 8 devices the network's channel using devices will shutdown,
-you can either remove devices, or add a <ItemLink id="controller" />.
+没有<ItemLink id="controller" />的网络会被认为是自组织的，至多可以承载8台使用频道的设备。
+一旦超出上限，网络中使用频道的设备就会宕机。你可以移除一部分设备或是加入<ItemLink id="controller" />。
 
-Unlike with controllered networks, [smart cables](../items-blocks-machines/cables.md) on ad-hoc networks will show the number
-of channels in use network-wide instead of the number of channels flowing through that specific cable.
+与带有控制器的网络不同，自组织网络中的[智能线缆](../items-blocks-machines/cables.md)会显示网络中频道的使用量而不仅仅是经过该线缆的频道量。
 
-While using ad-hoc networks each device will
-use 1 channel network wide, this is very different from how <ItemLink id="controller" /> allocate channels based on
-shortest route.
+尽管自组织网络中也是每个设备使用1个频道，其路由方式与<ItemLink id="controller" />基于最短路径的频道分配方式大相径庭。=
 
-## Design
+## 设计
 
-As mentioned before in [channel routing](channels.md#channel-routing), it's best to design your network in a treelike structure, with dense cables branching out from the controller, regular cables
-branching out from the dense, and [devices](../ae2-mechanics/devices.md) in clusters of 8 or fewer on the regular cables.
+正如上文[频道路由](channel.md#channel-routing)中提到的，最好是设计一个树状网络，其中致密线缆从控制器处引出，然后普通线缆从致密线缆处引出，
+最后[设备](../ae2-mechanics/devices.md)至多8个一组地接在普通线缆上。
 
-Here is an example of what not to do:
+以下是不该做的事情的例子：
 
-Following the channel paths,
+按频道路径，
 
-1. Immediately exiting the controller to the right, we're bottlenecked to 8 channels because the drive acts like a normal cable.
-However since we're not using a smart cable here we cannot see how many channels are in use. 8 channels left.
-2. The drive takes a channel.
-7 channels left.
-3. 2 channels go up to the terminals.
-5 channels left.
-4. Continuing right, the interface takes another channel.
-4 channels left.
-5. 1 channel goes up to the pattern provider.
-3 channels left.
-6. Continuing right, 1 channel goes up to the import bus.
-2 channels left.
-7. The cluster of pattern providers feeding assemblers only gets 2 channels, so 2 of the providers do not get channels.
+1. 向右离开控制器后，频道数立即被限制到了8，因为驱动器具有和普通线缆一致的行为，成为了传输的瓶颈。
+然而由于我们没有使用智能线缆，无从得知多少频道正在被使用。剩余8频道。
+1. 驱动器占用1频道。
+剩余7频道。
+1. 2频道向上进入终端。
+剩余5频道。
+1. 继续向右，接口占用了1频道.
+剩余4频道。
+1. 1频道向上进入样板供应器。
+剩余3频道。
+1. 继续向右，1频道向上进入输入总线。
+剩余2频道。
+1. 为分子组装室提供样板的供应器只分得2频道，因而有2个供应器未分得频道.
 
-Ultimately the error is in bottlenecking the channels and not thinking through how channels will be distributed.
+最终问题出在频道传输的瓶颈，以及缺乏对频道路由的充分思考。
 
 <GameScene zoom="4" interactive={true}>
   <ImportStructure src="../assets/assemblies/bad_network_structure.snbt" />
 
 <LineAnnotation color="#33ff33" from="6.5 .5 1.5" to="6 .5 1.5" alwaysOnTop={true} thickness="0.4">
-  32 channels
+  32频道
 </LineAnnotation>
 
 <LineAnnotation color="#33ff33" from="6 .5 1.5" to="5.5 .5 1.5" alwaysOnTop={true} thickness="0.2">
-  8 channels
+  8频道
 </LineAnnotation>
 
 <LineAnnotation color="#33ff33" from="5.5 .5 1.5" to="5.5 1.5 1.5" alwaysOnTop={true} thickness="0.1">
-  2 channels
+  2频道
 </LineAnnotation>
 
 <LineAnnotation color="#33ff33" from="5.5 .5 1.5" to="5.5 .3 1.5" alwaysOnTop={true} thickness="0.071">
-  1 channel
+  1频道
 </LineAnnotation>
 
 <LineAnnotation color="#33ff33" from="5.5 1.5 1.5" to="5.5 2.5 1.5" alwaysOnTop={true} thickness="0.071">
-  1 channel
+  1频道
 </LineAnnotation>
 
 <LineAnnotation color="#33ff33" from="5.5 2.5 1.5" to="5.5 2.5 1.1" alwaysOnTop={true} thickness="0.071">
-  1 channel
+  1频道
 </LineAnnotation>
 
 <LineAnnotation color="#33ff33" from="5.5 .5 1.5" to="4.5 .5 1.5" alwaysOnTop={true} thickness="0.158">
-  5 channels
+  5频道
 </LineAnnotation>
 
 <LineAnnotation color="#33ff33" from="4.5 .5 1.5" to="4.5 .3 1.5" alwaysOnTop={true} thickness="0.071">
-  1 channel
+  1频道
 </LineAnnotation>
 
 <LineAnnotation color="#33ff33" from="4.5 .5 1.5" to="4.5 1.5 1.5" alwaysOnTop={true} thickness="0.071">
-  1 channel
+  1频道
 </LineAnnotation>
 
 <LineAnnotation color="#33ff33" from="4.5 .5 1.5" to="3.5 .5 1.5" alwaysOnTop={true} thickness="0.122">
-  3 channels
+  3频道
 </LineAnnotation>
 
 <LineAnnotation color="#33ff33" from="3.5 .5 1.5" to="3.5 2.5 1.5" alwaysOnTop={true} thickness="0.071">
-  1 channel
+  1频道
 </LineAnnotation>
 
 <LineAnnotation color="#33ff33" from="3.5 2.5 1.5" to="3.7 2.5 1.5" alwaysOnTop={true} thickness="0.071">
-  1 channel
+  1频道
 </LineAnnotation>
 
 <LineAnnotation color="#33ff33" from="3.5 .5 1.5" to="1.5 .5 1.5" alwaysOnTop={true} thickness="0.1">
-  2 channels
+  2频道
 </LineAnnotation>
 
 <LineAnnotation color="#33ff33" from="1.5 0.5 1.5" to="1.5 0.3 1.5" alwaysOnTop={true} thickness="0.071">
-  1 channel
+  1频道
 </LineAnnotation>
 
 <LineAnnotation color="#33ff33" from="1.5 0.5 1.5" to="0.5 0.5 1.5" alwaysOnTop={true} thickness="0.071">
-  1 channel
+  1频道
 </LineAnnotation>
 
 <LineAnnotation color="#33ff33" from="0.5 0.5 1.5" to="0.5 0.5 0.5" alwaysOnTop={true} thickness="0.071">
-  1 channel
+  1频道
 </LineAnnotation>
 
 <LineAnnotation color="#ff3333" from="0.5 1.5 1.5" to="0.5 1.3 1.5" alwaysOnTop={true} thickness="0.071">
-  no channels
+  无频道
 </LineAnnotation>
 
 <LineAnnotation color="#ff3333" from="1.5 1.5 0.5" to="1.5 1.3 0.5" alwaysOnTop={true} thickness="0.071">
-  no channels
+  无频道
 </LineAnnotation>
 
   <IsometricCamera yaw="195" pitch="30" />
@@ -247,44 +235,42 @@ Ultimately the error is in bottlenecking the channels and not thinking through h
 
 ---
 
-Here is an example of a good structure:
+这里有个不错的示范：
 
 <GameScene zoom="2.5" interactive={true}>
   <ImportStructure src="../assets/assemblies/treelike_network_structure.snbt" />
 
     <BoxAnnotation color="#dddddd" min="6.9 0 4.9" max="9.1 4 7.1" thickness="0.05">
-        Notice that the pattern providers are in separate groups of 8.
+        注意样板供应器是每8个一组的。
     </BoxAnnotation>
 
     <BoxAnnotation color="#dddddd" min="5 4 4" max="8 5 5" thickness="0.05">
-        Two regular cables full of channels coming together mean you need a dense cable.
+        两个频道均占满的普通线缆汇集在一起，意味着你需要使用致密线缆。
     </BoxAnnotation>
 
     <BoxAnnotation color="#dddddd" min="5 0 13" max="8 1 14" thickness="0.05">
-        Different cable colors are used to prevent adjacent cables from connecting.
+        不同颜色的线缆用于防止相邻线缆相连。
     </BoxAnnotation>
 
 
   <IsometricCamera yaw="315" pitch="30" />
 </GameScene>
 
-## Channel Modes
+## 频道模式
 
-AE2 10.0.0 for Minecraft 1.18 introduces new options to change how AE2 channels behave in your world.
-There's a new configuration option in the general section (`channels`) which controls this option, and a new in-game
-command for operators to change the mode and the config from inside the game. The command is `/ae2 channelmode <mode>`
-to change it and `/ae2 channelmode` to show the current mode. When the mode is changed in-game, all existing grids will
-reboot and use the new mode immediately.
+基于Minecraft 1.18的AE2 10.0.0引入了改变AE2 频道行为的新选项。
+通用部分的新配置项(`channel`)控制该选项，此外有一个新的游戏内命令让管理员们可以在游戏内改变模式和配置。
+命令`/ae2 channelmode <mode>`用于改变模式，而`/ae2 channelmode`用于显示当前模式。
+在游戏内改变模式会让所有网络立即重启并在新模式下运作
 
-This resurrects and improves upon the option that was available in Minecraft 1.12 and introduces better options for
-players that just want a little more laid back gameplay but don't want the mechanic to be removed entirely.
+这重启并改进了Minecraft 1.12中曾有的选项，并为那些只是想要稍微轻松一点的游戏体验而非完全移除这一机制的玩家提供了更好的选项。
 
-The following table lists the available modes in both the configuration file and command.
+下表列出了配置文件和命令中所有支持的模式。
 
-| Setting    | Description                                                                                                                                                                                                                               |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `default`  | The standard mode with the channel capacities of cable and ad-hoc networks as described throughout this website                                                                                                                           |
-| `x2`       | All channel capacities are doubled (16 on normal cable, 64 on dense cable, ad-hoc networks support 16 channels)                                                                                                                           |
-| `x3`       | All channel capacities are tripled (24 on normal cable, 92 on dense cable, ad-hoc networks support 24 channels)                                                                                                                           |
-| `x4`       | All channel capacities are quadrupled (32 on normal cable, 128 on dense cable, ad-hoc networks support 32 channels)                                                                                                                       |
-| `infinite` | All channel restrictions are removed. Controllers still reduce the power consumption of grids *significantly*. Smart cables will only toggle between completely off (no channels carried) and completely on (1 or more channels carried). |
+| 设置       | 描述                                                                                                                  |
+| ---------- | -------------------------------------------------------------------------------------------------------------------- |
+| `default`  | 默认模式，线缆和自组织网络的频道承载力如本教程所述。                                                                      |
+| `x2`       | 所有频道的承载力翻一倍(普通线缆16，致密线缆64，自组织网络支持16频道)。                                                     |
+| `x3`       | 所有频道的承载力翻两倍(普通线缆24，致密线缆96，自组织网络支持24频道)。                                                     |
+| `x4`       | 所有频道的承载力翻三倍(普通线缆32，致密线缆128，自组织网络支持32频道)。                                                    |
+| `infinite` | 所有频道的承载力不再受限。 控制器仍然会**大幅**降低网络能耗。智能线缆只会有完全关(未承载频道)和完全开(至少承载1个频道)两种状态。|

@@ -1,16 +1,15 @@
 ---
 navigation:
   parent: ae2-mechanics/ae2-mechanics-index.md
-  title: Devices
+  title: 设备
   icon: interface
 ---
 
-# Devices
+# 设备
 
-A "Device" refers to an AE2 network component that performs some function related to the network itself. They almost always
-require a channel, with the notable exception of [Level Emitters](../items-blocks-machines/level_emitter.md).
+**设备**指的是对网络本身进行操作的AE2组件。它们几乎都需要占用频道，除了[标准发信器](../items-blocks-machines/level_emitter.md)这一反例。
 
-Some examples include:
+以下是一些设备：
 
 *   <ItemLink id="interface" />
 *   <ItemLink id="import_bus" />

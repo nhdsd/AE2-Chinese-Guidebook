@@ -41,9 +41,19 @@ A2 当然！只要你遵循本项目的开源许可证。但是，你可能同�
 * `ae2-mechanics\`
   * `ae2-mechanics-index.md`
   * `autocrafting.md`
+  * `bytes-and-types.md`
+  * `cable-subparts.md`
+  * `certus-growth.md`
+  * `channels.md`
+  * `devices.md`
+  * `meteorites.md`
+  * `p2p-tunnels.md`
+  * `quantum-bridge.md`
 
 ### 部分完成
-* `ae2-mechanics\bytes-and-types.md`
 
 ### 计划中
 **部分完成**部分的内容默认计入**计划中**部分。
+* `ae2-mechanics\`
+  * `energy.md`
+  * `import-export-storage.md`

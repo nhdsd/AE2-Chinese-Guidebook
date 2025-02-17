@@ -1,10 +1,10 @@
 ---
 navigation:
   parent: ae2-mechanics/ae2-mechanics-index.md
-  title: Quantum Bridge
+  title: 量子桥
   icon: quantum_ring
 ---
 
-# The Quantum Network Bridge
+# 量子桥
 
-See [Quantum Network Bridge](../items-blocks-machines/quantum_bridge.md)
+参见[量子桥](../items-blocks-machines/quantum_bridge.md)。
