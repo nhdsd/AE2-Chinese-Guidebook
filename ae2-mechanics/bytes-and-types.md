@@ -1,7 +1,7 @@
 ---
 navigation:
   parent: ae2-mechanics/ae2-mechanics-index.md
-  title: Bytes and Types
+  title: 字节与类型
   icon: creative_item_cell
 ---
 
@@ -9,20 +9,14 @@ navigation:
 
 <Row>
     <ItemImage id="item_storage_cell_1k" scale="4" />
-
     <ItemImage id="item_storage_cell_4k" scale="4" />
-
     <ItemImage id="item_storage_cell_16k" scale="4" />
-
     <ItemImage id="item_storage_cell_64k" scale="4" />
-
     <ItemImage id="item_storage_cell_256k" scale="4" />
   </Row>
 
-[Storage Cells](../items-blocks-machines/storage_cells.md) are defined by both *bytes* and *types*. Bytes, like in
-your actual computer, are a measure of the total amount of "stuff" in a storage cell. Types are a measure of how many different,
-well, *types* of things are stored in a cell. Each type represents a unique item, so 4,096 cobblestone is 1 type but 16 different
-swords with different enchantments are 16 types.
+[存储元件](../items-blocks-machines/storage_cells.md)的容量由**字节数**和**种类数**一同决定。字节数和现实中的电脑中一样，是对存储元件中总物品量的度量。
+种类数则是对元件中有多少种不同物品，或者说**种类**的度量。每个种类代表一种物品，因此4,096个圆石是1种而16把带有不同附魔的剑是16种。
 
 Each storage cell can store a fixed amount
 of data. Each type consumes a number of bytes upfront (which varies with the cell

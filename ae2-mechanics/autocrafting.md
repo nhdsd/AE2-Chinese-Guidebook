@@ -54,7 +54,7 @@ navigation:
 
 *   <ItemLink id="crafting_pattern" />编码合成台配方。它们可以被放在<ItemLink id="molecular_assembler" />里，让它只要有原料就合成相应产物，
 但是它们主要用于与分子装配室相邻的<ItemLink id="pattern_provider" />里。此时样板供应器会有特殊的行为，会把样板和原料一同送进相邻的分子装配室。
-鉴于分子装配室会把产物自动弹出至相邻容器这种，装配室与样板供应器的组合足以自动化工作台合成。
+鉴于分子装配室会把产物自动弹出至相邻容器中，装配室与样板供应器的组合足以自动化工作台合成。
 
 ***
 
@@ -75,7 +75,7 @@ navigation:
 ME系统不关心这些，它只关心它收没收到样板所指明的产物。实际上，它甚至不关心原料和产物是否有任何关系。
 你可以给它一个“1樱花木板 = 1下界之星”的样板，并让你的凋灵农场在接收到1个樱花木板时杀死1只凋灵，这样也能正常工作。
 
-多个具有完全相同的样板的<ItemLink id="pattern_provider" />是受支持的并且可以并行处理。此外，你可以编码一个8圆石 = 8石头的样板而不是1圆石 = 1石头的。
+多个具有完全相同的样板的<ItemLink id="pattern_provider" />可同时使用并且可以并行处理。此外，你可以编码一个8圆石 = 8石头的样板而不是1圆石 = 1石头的。
 这时，样板供应器会每次把8个圆石放入你的烧炼机器，而非1个。
 
 ## "样板"的最一般形式
@@ -104,7 +104,7 @@ ME系统不关心这些，它只关心它收没收到样板所指明的产物。
 
 它们可以被设置为只接受玩家请求、只接受自动化系统（输出总线或者接口）请求或是均接受。
 
-# Pattern Providers
+# 样板供应器
 
 <Row>
 <BlockImage id="pattern_provider" scale="4" />
@@ -116,72 +116,53 @@ ME系统不关心这些，它只关心它收没收到样板所指明的产物。
 </GameScene>
 </Row>
 
-<ItemLink id="pattern_provider" />s are the primary way in which your autocrafting system interacts with the world. They push the ingredients in
-their [patterns](../items-blocks-machines/patterns.md) to adjacent inventories, and items can be inserted into them in order to insert them into the network. Often
-a channel can be saved by piping the output of a machine back into a nearby pattern provider (often the one that pushed the ingredients)
-instead of using an <ItemLink id="import_bus" /> to pull the output of the machine into the network.
+<ItemLink id="pattern_provider" />是自动合成系统与世界进行交互的基础。它们把内含的[样板](../items-blocks-machines/patterns.md)中的原料送入相邻的容器中，
+此外，物品可被放入其中，以将这些物品送入网络。大多数情况下把机器的产物通过旁边的样板供应器(一般是送入原料的那一个)送回网络，而非使用<ItemLink id="import_bus" />拉取产物可以节省1个频道。
 
-Of note, since they push the ingredients directly from the [crafting storage](../items-blocks-machines/crafting_cpu_multiblock.md#crafting-storage) in a crafting CPU, they
-never actually contain the ingredients in their inventory, so you cannot pipe out from them. You have to have the provider push
-to another inventory (like a barrel) then pipe from that.
+值得注意的是，鉴于它们直接从合成CPU中的[合成存储器](../items-blocks-machines/crafting_cpu_multiblock.md#crafting-storage)中获取并送出原料，
+它们本身并不会存储这些原料，你也无法把原料从中泵出。你需要让供应器把原料送进其他的容器(如木桶)并从该容器中泵出原料。
+此外，样板供应器必须一次性送出所有原料，无法送出不完整的一批原料。这是个值得利用的特性。
 
-Also of note, the provider has to push ALL of the ingredients at once, it can't push half-batches. This is useful
-to exploit.
+样板供应器与[子网](../ae2-mechanics/subnetworks.md)上的接口有特殊的交互行为：若该接口未被更改(请求栏中无物品/流体)，供应器会直接跳过接口并直接将原料送入子网的[存储](../ae2-mechanics/import-export-storage.md)中，而不是送入接口。更重要的是，供应器会在有充足的存储空间前停止送入下一批原料。
 
-Pattern providers have a special interaction with interfaces on [subnets](../ae2-mechanics/subnetworks.md): if the interface is unmodified (nothing in the request slots)
-the provider will skip the interface entirely and push directly to that subnet's [storage](../ae2-mechanics/import-export-storage.md),
-skipping the interface and not filling it with recipe batches, and more importantly, not inserting the next batch until there's space in storage.
+多个具有完全相同的样板的样板供应器可同时使用并且可以并行处理。
 
-Multiple pattern providers with identical patterns are supported and work in parallel.
+样板供应器采取轮询调度，因此所有相邻的机器可并行运作。
 
-Pattern providers will attempt to round-robin their batches to all of their faces, thus using all attached machines in parallel.
+## 变种
 
-## Variants
+样板供应器有3种变种：普通型，定向型及面板型。这会影响它们向哪些面送入原料，从哪些面接收产物以及向哪些面提供网络连接。
 
-Pattern Providers come in 3 different variants: normal, directional, and flat. This affects which specific sides they push
-ingredients to, receive items from, and provide a network connection to.
+*   普通样板供应器会向各面送入原料，从各面接受产物，并如大部分AE2元件一样向各面提供网络连接。
 
-*   Normal pattern providers push ingredients to all sides, receive inputs from all sides, and, like most AE2 machines, act
-    like a cable providing network connection to all sides.
+*   定向样板供应器是通过对普通的样板供应器使用<ItemLink id="certus_quartz_wrench" />切换方向得到的。它们只向指向面提供原料，从各面接受产物，
+以及**不**向指向的面提供网络连接。在你想建立子网的情况下，这让你能够把原料送入AE2元件而不会使得网络相连。
 
-*   Directional pattern providers are made by using a <ItemLink id="certus_quartz_wrench" /> on a normal pattern provider to change its
-    direction. They only push ingredients to the selected side, receive inputs from all sides, and specifically don't provide a network
-    connection on the selected side. This allows them to push to AE2 machines without connecting networks, if you want to make a subnetwork.
+*   面板样板供应器是[线缆组分](../ae2-mechanics/cable-subparts.md)，因此可以在同一线缆上放置多个使得机器紧凑。它们与指向其面板方向的定向样板供应器行为一致。
 
-*   Flat pattern providers are a [cable subpart](../ae2-mechanics/cable-subparts.md), and so multiple can be placed on the same cable, allowing for compact setups.
-    They act similar to the selected side on a directional pattern provider, providing patterns, receiving inputs, and not
-    providing a network connection on their face.
+通过合成，普通型和面板型样板供应器可以相互转换。
 
-Pattern providers can be swapped between normal and flat in a crafting grid.
+## 设置项
 
-## Settings
+样板供应器有许多模式：
 
-Pattern providers have a variety of modes:
+*   **阻塞模式**在机器中已有原料的情况下阻止新一批原料进入机器。
+*   **锁定合成**可在不同的红石信号输入下或是在上次的合成产物返回该样板供应器前锁定该样板供应器。
+*   供应器可选择是否在<ItemLink id="pattern_access_terminal" />中展示。
 
-*   **Blocking Mode** stops the provider from pushing a new batch of ingredients if there are already
-    ingredients in the machine.
-*   **Lock Crafting** can lock the provider under various redstone conditions, or until the result of the
-    previous craft is inserted into that specific pattern provider.
-*   The provider can be shown or hidden on <ItemLink id="pattern_access_terminal" />s.
+## 优先级
 
-## Priority
+点击GUI右上角的扳手按钮可以设置优先级。当有多个合成相同物品的[样板](../items-blocks-machines/patterns.md)时，
+高优先级供应器中的样板将会比低优先级供应器中的样板先得到使用，除非网络中高优先级样板的原料不足。
 
-Priorities can be set by clicking the wrench in the top-right of the GUI. In the case of several [patterns](../items-blocks-machines/patterns.md)
-for the same item, patterns in providers with higher priority will be used over patterns in providers with lower priority,
-unless the network does not have the ingredients for the higher priority pattern.
-
-# Molecular Assemblers
+# 分子装配室
 
 <BlockImage id="molecular_assembler" scale="4" />
 
-The <ItemLink id="molecular_assembler" /> takes items input into it and carries out the operation defined by an adjacent <ItemLink id="pattern_provider" />,
-or the inserted <ItemLink id="crafting_pattern" />, <ItemLink id="smithing_table_pattern" />, or <ItemLink id="stonecutting_pattern" />,
-then pushes the result to adjacent inventories.
+<ItemLink id="molecular_assembler" />接受物品输入并执行相邻<ItemLink id="pattern_provider" />或放入其中的<ItemLink id="crafting_pattern" />、<ItemLink id="smithing_table_pattern" />或<ItemLink id="stonecutting_pattern" />指定的合成操作，然后把产物送入相邻容器中。
 
-Their main use is next to a <ItemLink id="pattern_provider" />. Pattern providers have special behavior in this case,
-and will send information about the relevant pattern along with the ingredients to adjacent assemblers. Since assemblers auto-eject the results of
-crafts to adjacent inventories (and thus into the return slots of the pattern provider), an assembler on a pattern provider
-is all that is needed to automate crafting patterns.
+它们主要与<ItemLink id="pattern_provider" />合用，放在它旁边。此时样板供应器会有特殊的行为，会把样板和原料一同送进相邻的分子装配室。
+鉴于分子装配室会把产物自动弹出至相邻容器中，装配室与样板供应器的组合足以自动化工作台合成。
 
 <GameScene zoom="4" background="transparent">
 <ImportStructure src="../assets/assemblies/assembler_tower.snbt" />
