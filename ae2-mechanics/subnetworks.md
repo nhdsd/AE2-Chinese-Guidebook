@@ -1,7 +1,7 @@
 ---
 navigation:
   parent: ae2-mechanics/ae2-mechanics-index.md
-  title: Subnetworks
+  title: 子网
 ---
 
 # Subnetworks

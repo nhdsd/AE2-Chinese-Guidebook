@@ -47,6 +47,8 @@ A2 当然！只要你遵循本项目的开源许可证。但是，你可能同�
   * `channels.md`
   * `devices.md`
   * `energy.md`
+  * `import-export-storage.md`
+  * `me-network-connections.md`
   * `meteorites.md`
   * `p2p-tunnels.md`
   * `quantum-bridge.md`

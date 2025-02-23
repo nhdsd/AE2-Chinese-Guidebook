@@ -1,7 +1,7 @@
 ---
 navigation:
   parent: ae2-mechanics/ae2-mechanics-index.md
-  title: Spatial IO
+  title: 空间IO
   icon: spatial_storage_cell_2
 ---
 
