@@ -2,6 +2,9 @@ Due to the purpose of this project, the readme will be written in Chinese (Simpl
 
 鉴于本项目的目的，readme文件将使用简体中文书写。
 
+> [!IMPORTANT]
+> 请参见[#1](https://github.com/nhdsd/AE2-Chinese-Guidebook/issues/1)。[提交Pull Request->](https://github.com/nhdsd/AE2-Chinese-Guidebook/pulls)
+
 ---
 
 # AE2 Chinese Guidebook
@@ -51,6 +54,7 @@ A2 当然！只要你遵循本项目的开源许可证。但是，你可能同�
   * `me-network-connections.md`
   * `meteorites.md`
   * `p2p-tunnels.md`
+  * `spatial-io.md`
   * `quantum-bridge.md`
 
 ### 部分完成
@@ -58,4 +62,4 @@ A2 当然！只要你遵循本项目的开源许可证。但是，你可能同�
 ### 计划中
 **部分完成**部分的内容默认计入**计划中**部分。
 * `ae2-mechanics\`
-  * `import-export-storage.md`
+  * `subnetworks.md`
