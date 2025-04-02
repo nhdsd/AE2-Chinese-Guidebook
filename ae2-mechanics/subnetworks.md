@@ -10,42 +10,39 @@ navigation:
 <ImportStructure src="../assets/assemblies/subnet_demonstration.snbt" />
 
 <DiamondAnnotation pos="6.5 2.5 0.5" color="#00ff00">
-        Item Pipe Subnet
+        物品管道子网
     </DiamondAnnotation>
 
 <DiamondAnnotation pos="5.5 2.5 0.5" color="#00ff00">
-        Fluid Pipe Subnet
+        流体管道子网
     </DiamondAnnotation>
 
 <DiamondAnnotation pos="4.5 2.5 0.5" color="#00ff00">
-        Filtered Annihilation Plane
+        已过滤的破坏面板
     </DiamondAnnotation>
 
 <DiamondAnnotation pos="3.5 2.5 0.5" color="#00ff00">
-        Formation Plane Subnet
+        成型面板子网
     </DiamondAnnotation>
 
 <DiamondAnnotation pos="2.5 2.5 0.5" color="#00ff00">
-        Subnet using the Interface-Storage Bus interaction to act as a local sub-storage that the main
-network can access
+        使用接口-存储总线交互的子网，主网络会将其视为普通的容器来访问
     </DiamondAnnotation>
 
 <DiamondAnnotation pos="1.5 1.5 0.5" color="#00ff00">
-        Another item pipe subnet, to return the charged items to the Pattern Provider
+        另一个物品管道子网，用于把充能完成的物品送回样板供应器
     </DiamondAnnotation>
 
 <IsometricCamera yaw="195" pitch="30" />
 </GameScene>
 
-"Subnetwork" is a rather loosely-defined term, but one might say that a subnetwork is any network that supports your
-main network or does some small task. They are typically small enough to not require controllers. Their main 2 uses tend to be:
+"子网"并没有严格的定义，但有人认为子网是任意的辅助主网络或完成某些简单任务的网络。一般情况下，子网规模都较小而不需要使用控制器。
+子网主要有两个用途：
 
-*   To restrict what [devices](../ae2-mechanics/devices.md) have access to what storage (you don't want the import bus on a "pipe" subnet to have access to your main net
-    storage, or it will put the items in your storage cells instead of in the destination inventory).
-*   To save channels on your main network, like having a pattern provider output to an interface connected to several storage
-    busses on several machines, using 1 channel, instead of putting a pattern provider on each machine, using several channels.
+*   限制[设备](../ae2-mechanics/devices.md)的存储访问范围(你肯定不希望"管道"子网中的输入总线能访问你的网络主存储，不然它会把物品放进存储元件而非目标容器中)；
+*   减少主网中的频道使用，例如让样板供应器把物品输出到连接了若干机器上的若干总线的面板上而仅需消耗1个频道，而不需要在每台机器上都放置一个样板控制器，消耗更多频道。
 
-Cables with different colors have nothing to do with making a subnetwork other than that they won't connect to each other.
+线缆的不同颜色除了防止它们互相连接外与子网的构成无关。
 
 They can be
 

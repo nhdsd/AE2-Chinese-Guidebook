@@ -58,8 +58,8 @@ A2 当然！只要你遵循本项目的开源许可证。但是，你可能同�
   * `quantum-bridge.md`
 
 ### 部分完成
+* `ae2-mechanics\`
+  * `subnetworks.md`
 
 ### 计划中
 **部分完成**部分的内容默认计入**计划中**部分。
-* `ae2-mechanics\`
-  * `subnetworks.md`
